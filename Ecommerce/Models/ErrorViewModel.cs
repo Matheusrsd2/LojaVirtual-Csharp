@@ -1,6 +1,6 @@
 using System;
 
-namespace Ecommerce.Models
+namespace LojaVirtualCsharp.Models
 {
     public class ErrorViewModel
     {

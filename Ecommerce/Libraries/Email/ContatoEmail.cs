@@ -1,9 +1,9 @@
 using System;
 using System.Net;
 using System.Net.Mail;
-using Ecommerce.Models;
+using LojaVirtualCsharp.Models;
 
-namespace Ecommerce.Libraries.Email
+namespace LojaVirtualCsharp.Libraries.Email
 {
     public class ContatoEmail
     {
@@ -11,7 +11,7 @@ namespace Ecommerce.Libraries.Email
         {
             SmtpClient smtp = new SmtpClient("smtp.gmail.com" , 587);
             smtp.UseDefaultCredentials = false;
-            smtp.Credentials = new NetworkCredential("matttheus.reee@gmail.com","");
+            smtp.Credentials = new NetworkCredential("matttheus.reee@gmail.com","breakingbad");
             smtp.EnableSsl = true;
             smtp.Timeout = 2000000;
 

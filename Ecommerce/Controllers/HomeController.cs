@@ -1,14 +1,15 @@
-﻿using Ecommerce.Libraries.Email;
-using Ecommerce.Models;
+﻿using LojaVirtualCsharp.Libraries.Email;
+using LojaVirtualCsharp.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Ecommerce.Controllers
+namespace LojaVirtualCsharp.Controllers
 {
     public class HomeController : Controller
     {
@@ -53,10 +54,18 @@ namespace Ecommerce.Controllers
             contato.Email = HttpContext.Request.Form["email"];
             contato.Texto = HttpContext.Request.Form["texto"];
 
-            //ContatoEmail.EnviarContatoPorEmail(contato);
+            /*var ListaMensagem = new List<ValidationResult>();
+            var contexto = new ValidationContext(contato);
+            Validator.TryValidateObject(contato,contexto,ListaMensagem);
+            if (isValid)
+            {
+
+            }*/
+
+            ContatoEmail.EnviarContatoPorEmail(contato);
             ViewData["MSG_S"] = "Mensagem enviada com sucesso";
             }
-            catch(Exception e)
+            catch(System.Exception)
             {
                 ViewData["MSG_E"] = "Ops! Houve um erro ao tentar enviar";
             }
