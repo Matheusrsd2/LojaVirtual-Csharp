@@ -1,4 +1,5 @@
-﻿using Ecommerce.Models;
+﻿using Ecommerce.Libraries.Email;
+using Ecommerce.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -45,10 +46,21 @@ namespace Ecommerce.Controllers
 
         public IActionResult ContatoAcao()
         {
-            return new ContentResult()
+            try
             {
-                Content = "Dados recebidos com sucesso!"
-            };
+            Contato contato = new Contato();
+            contato.Nome = HttpContext.Request.Form["nome"];
+            contato.Email = HttpContext.Request.Form["email"];
+            contato.Texto = HttpContext.Request.Form["texto"];
+
+            //ContatoEmail.EnviarContatoPorEmail(contato);
+            ViewData["MSG_S"] = "Mensagem enviada com sucesso";
+            }
+            catch(Exception e)
+            {
+                ViewData["MSG_E"] = "Ops! Houve um erro ao tentar enviar";
+            }
+            return View("Contato");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
