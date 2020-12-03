@@ -11,6 +11,6 @@ namespace LojaVirtualCsharp.Database
     {
         public Context(DbContextOptions<Context> options) : base(options)
         { }
-        public DbSet<Cliente> clientes { get; set; }
+        public DbSet<Cliente> Clientes { get; set; }
     }
 }

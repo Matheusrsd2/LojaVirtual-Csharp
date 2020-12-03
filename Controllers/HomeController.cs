@@ -8,16 +8,19 @@ using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using LojaVirtualCsharp.Database;
 
 namespace LojaVirtualCsharp.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly Context _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, Context context)
         {
             _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
@@ -35,8 +38,25 @@ namespace LojaVirtualCsharp.Controllers
             return View();
         }
 
+        /*******
+        /Cadastro de cliente */
+        [HttpGet]
         public IActionResult CadastroCliente()
         {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult CadastroCliente([FromForm] Cliente cliente)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Clientes.Add(cliente);
+                _context.SaveChanges();
+
+                TempData["MSG_S"] = "Cadastro realizado com sucesso";
+                return RedirectToAction(nameof(CadastroCliente));
+            }
             return View();
         }
 
